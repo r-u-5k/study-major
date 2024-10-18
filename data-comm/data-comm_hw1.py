@@ -15,16 +15,15 @@ def manchester_encoding(data):
 # 비트의 시작에서 신호 전환이 발생하면 0, 신호 전환이 발생하지 않으면 1
 def differential_manchester_encoding(data):
     encoded_signal = [0, 1]
-    current_signal = encoded_signal[-1]
     for bit in data[1:]:
         if bit == 1:
-            encoded_signal.extend([current_signal, current_signal ^ 1])
+            encoded_signal.extend([encoded_signal[-1], encoded_signal[-1] ^ 1])
         elif bit == 0:
-            current_signal ^= 1
-            encoded_signal.extend([current_signal, current_signal ^ 1])
+            encoded_signal.extend([encoded_signal[-1] ^ 1, encoded_signal[-1]])
     print("Differential Manchester: " + str(encoded_signal))
+    # [0, 1, 1, 0, 1, 0, 1, 0, 0, 1, 1, 0, ...]
     return encoded_signal
-# [0, 1, 1, 0, 1, 0, 1, 0, 0, 1, 1, 0, ...]
+
 # 입력 데이터
 input_data = [0, 1, 0, 0, 1, 1, 0, 1, 0, 0]
 
