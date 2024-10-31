@@ -40,3 +40,26 @@ def DirectUpload(FullPath, Table, Data, Columns):
     conn.close()
 
     return []
+
+
+def NullTesting(DBNAME, Content, TargetA, TargetB):
+    query = f"select EXISTS(select * from {DBNAME} where {Content} >= TIMESTAMP '%s' " \
+            f"AND {Content} <= TIMESTAMP '%s' " \
+            f"AND not ({DBNAME} is not null))" % (TargetA, TargetB)
+    return query
+
+
+def Deleting(DBNAME, Content, TargetA):
+    query = f"delete from {DBNAME} where {Content} = {TargetA}"
+    return query
+
+
+def DataDownloader(DB, Begin, End):
+    query = f"""select * from {DB} WHERE "DeliveryDT" >= TIMESTAMP '{Begin}' AND "DeliveryDT" <= TIMESTAMP '{End}' """
+    alchemyEngine = create_engine(conn_string)
+    dbConnection = alchemyEngine.connect()
+    Data = pd.read_sql(query, con=dbConnection)
+    dbConnection.close()
+    alchemyEngine.dispose()
+
+    return Data

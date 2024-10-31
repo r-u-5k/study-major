@@ -5,6 +5,8 @@ import matplotlib.pyplot as plt
 import params as pa
 import numpy as np
 import random
+from DB import db_new as db
+import psycopg2
 
 from dotenv import load_dotenv
 from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
@@ -23,8 +25,9 @@ pd.set_option("display.max_columns", 5000)
 
 
 def solar_read():
-    FilePath = os.path.join(pa.Loc, pa.FileNameSolar)
-    Solar = pd.read_csv(FilePath)
+    begin_date = pd.Timestamp(year=2022, month=1, day=10, hour=0)
+    end_date = pd.Timestamp(year=2023, month=6, day=30, hour=23)
+    Solar = db.DataDownloader("solar", begin_date, end_date)
     Solar["DeliveryDT"] = pd.to_datetime(Solar["DeliveryDT"])
     Solar = Solar.sort_values(by="DeliveryDT", ascending=[True])
     Solar = Solar.rename(columns={'MW': "Target"})
@@ -64,22 +67,22 @@ def regression():
             verbose=0,
         )
 
-    elif pa.Machine == "GBM":
-        machine = GradientBoostingRegressor(
-            n_estimators=pa.GBM_Tree,
-            learning_rate=pa.GBM_LR,
-            max_depth=pa.GBM_Depth,
-            random_state=random.randint(0, 1000),
-            criterion="friedman_mse",
-            subsample=pa.subsample,
-            min_samples_split=2,
-            max_features=pa.GBMMF,  # sqrt auto
-            verbose=0,
-            loss="squared_error",
-        )
-
-    elif pa.Machine == "LR":
-        machine = LinearRegression(fit_intercept=True)
+    # elif pa.Machine == "GBM":
+    #     machine = GradientBoostingRegressor(
+    #         n_estimators=pa.GBM_Tree,
+    #         learning_rate=pa.GBM_LR,
+    #         max_depth=pa.GBM_Depth,
+    #         random_state=random.randint(0, 1000),
+    #         criterion="friedman_mse",
+    #         subsample=pa.subsample,
+    #         min_samples_split=2,
+    #         max_features=pa.GBMMF,  # sqrt auto
+    #         verbose=0,
+    #         loss="squared_error",
+    #     )
+    #
+    # elif pa.Machine == "LR":
+    #     machine = LinearRegression(fit_intercept=True)
 
     return machine
 
@@ -162,7 +165,13 @@ def performance(Method, Pred, Actual):
 
 
 if __name__ == "__main__":
-    # 22년 1~12월의 데이터를 기반으로 23년 1~6월의 데이터를 예측
+    # conn = psycopg2.connect(host=pa.host, dbname=pa.dbname, user=pa.user, password=pa.password, port=pa.port)
+    # cur = conn.cursor()
+    # cur.execute(db.Deleting('test', 'name', 'b'))
+    # conn.commit()
+    # cur.close()
+    # conn.close()
+
     TrainingStart = pd.Timestamp(year=2022, month=1, day=1, hour=0)
     TrainingEnd = pd.Timestamp(year=2022, month=12, day=31, hour=23)
     TestingStart = pd.Timestamp(year=2023, month=1, day=1, hour=0)
