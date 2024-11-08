@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     "example",
     "EE",
     "CBV",
-    "corsheaders"
+    "corsheaders",
+    "photo"
 ]
 
 MIDDLEWARE = [
