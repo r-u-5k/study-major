@@ -39,8 +39,6 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "example",
-    "EE",
-    "CBV",
     "corsheaders",
     "photo"
 ]
