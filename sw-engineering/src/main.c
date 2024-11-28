@@ -52,6 +52,7 @@ void PowerUpControllerInterface(unsigned char PowerUpCommand);
 void Controller(unsigned char* ObstacleLocation, int DustExistence);
 
 // 메인 모듈
+#ifndef UNIT_TEST
 int main(void) {
     // 랜덤 시드 설정
     srand(time(NULL));
@@ -69,6 +70,7 @@ int main(void) {
 
     return 0;
 }
+#endif
 
 // Digital Clock
 int DigitalClock(void){

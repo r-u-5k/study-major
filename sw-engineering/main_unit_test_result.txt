@@ -1,0 +1,80 @@
+Test Case: Front=FALSE, Left=FALSE, Right=FALSE, Dust=0
+Motor Command: Move Forward
+Cleaner Command: Cleaner On
+PowerUp Command: PowerUp Off
+-------------------------------
+Test Case: Front=FALSE, Left=FALSE, Right=FALSE, Dust=5
+Motor Command: Move Forward
+Cleaner Command: Cleaner On
+PowerUp Command: PowerUp On
+-------------------------------
+Test Case: Front=FALSE, Left=FALSE, Right=TRUE, Dust=0
+Motor Command: Move Forward
+Cleaner Command: Cleaner On
+PowerUp Command: PowerUp Off
+-------------------------------
+Test Case: Front=FALSE, Left=FALSE, Right=TRUE, Dust=5
+Motor Command: Move Forward
+Cleaner Command: Cleaner On
+PowerUp Command: PowerUp On
+-------------------------------
+Test Case: Front=FALSE, Left=TRUE, Right=FALSE, Dust=0
+Motor Command: Move Forward
+Cleaner Command: Cleaner On
+PowerUp Command: PowerUp Off
+-------------------------------
+Test Case: Front=FALSE, Left=TRUE, Right=FALSE, Dust=5
+Motor Command: Move Forward
+Cleaner Command: Cleaner On
+PowerUp Command: PowerUp On
+-------------------------------
+Test Case: Front=FALSE, Left=TRUE, Right=TRUE, Dust=0
+Motor Command: Move Forward
+Cleaner Command: Cleaner On
+PowerUp Command: PowerUp Off
+-------------------------------
+Test Case: Front=FALSE, Left=TRUE, Right=TRUE, Dust=5
+Motor Command: Move Forward
+Cleaner Command: Cleaner On
+PowerUp Command: PowerUp On
+-------------------------------
+Test Case: Front=TRUE, Left=FALSE, Right=FALSE, Dust=0
+Motor Command: Turn Left
+Cleaner Command: Cleaner Off
+PowerUp Command: PowerUp Off
+-------------------------------
+Test Case: Front=TRUE, Left=FALSE, Right=FALSE, Dust=5
+Motor Command: Turn Left
+Cleaner Command: Cleaner Off
+PowerUp Command: PowerUp Off
+-------------------------------
+Test Case: Front=TRUE, Left=FALSE, Right=TRUE, Dust=0
+Motor Command: Turn Left
+Cleaner Command: Cleaner Off
+PowerUp Command: PowerUp Off
+-------------------------------
+Test Case: Front=TRUE, Left=FALSE, Right=TRUE, Dust=5
+Motor Command: Turn Left
+Cleaner Command: Cleaner Off
+PowerUp Command: PowerUp Off
+-------------------------------
+Test Case: Front=TRUE, Left=TRUE, Right=FALSE, Dust=0
+Motor Command: Turn Right
+Cleaner Command: Cleaner Off
+PowerUp Command: PowerUp Off
+-------------------------------
+Test Case: Front=TRUE, Left=TRUE, Right=FALSE, Dust=5
+Motor Command: Turn Right
+Cleaner Command: Cleaner Off
+PowerUp Command: PowerUp Off
+-------------------------------
+Test Case: Front=TRUE, Left=TRUE, Right=TRUE, Dust=0
+Motor Command: Turn Left
+Cleaner Command: Cleaner Off
+PowerUp Command: PowerUp Off
+-------------------------------
+Test Case: Front=TRUE, Left=TRUE, Right=TRUE, Dust=5
+Motor Command: Turn Left
+Cleaner Command: Cleaner Off
+PowerUp Command: PowerUp Off
+-------------------------------
