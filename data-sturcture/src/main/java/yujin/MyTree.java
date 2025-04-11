@@ -3,7 +3,7 @@ package yujin;
 import java.util.ArrayList;
 
 public class MyTree {
-    private MyNode root;
+    public MyNode root;
 
     MyTree() {
         root = null;
