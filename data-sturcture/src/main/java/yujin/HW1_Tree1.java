@@ -41,9 +41,9 @@ public class HW1_Tree1 {
                     sb.append(", ");
                 }
                 sb.append(node.element());
-                ArrayList children = node.children();
+                ArrayList<MyNode> children = node.children();
                 for (int j = 0; j < children.size(); j++) {
-                    queue.add((MyNode) children.get(j));
+                    queue.add(children.get(j));
                 }
             }
             System.out.println(sb);
