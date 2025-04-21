@@ -1,4 +1,4 @@
-package yujin;  // 패키지 선언
+package yujin;
 
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
@@ -59,7 +59,7 @@ public class MyHeap {
      * 삽입된 노드를 위로 올려 힙 속성(부모와 비교하여 올바른 위치) 유지
      */
     private void heapifyUp(int idx) {
-        MyNode curr = list.get(idx);    // 현재 노드 저장
+        MyNode curr = list.get(idx);     // 현재 노드 저장
         while (idx > 0) {                // 루트가 아닐 동안 반복
             int parentIdx = (idx - 1) / 2; // 부모 노드 인덱스 계산
             MyNode parent = list.get(parentIdx); // 부모 노드 가져오기
