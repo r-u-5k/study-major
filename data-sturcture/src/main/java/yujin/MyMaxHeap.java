@@ -9,22 +9,20 @@ public class MyMaxHeap {
     /** 새 노드를 힙에 삽입 */
     public void offer(MyNode node) {
         list.add(node);                    // 맨 끝(마지막 레벨의 오른쪽)에 노드를 추가
-        heapifyUp(list.size() - 1);       // 추가된 노드를 위로 올려서 힙 속성을 복원
+        heapifyUp(list.size() - 1);   // 추가된 노드를 위로 올려서 힙 속성을 복원
     }
 
     /** 루트 노드(가장 큰 값)를 제거하고 반환 */
     public MyNode poll() {
         if (list.isEmpty()) {
-            throw new NoSuchElementException("Heap is empty");
-            // 비어있으면 예외 발생
+            throw new NoSuchElementException();
         }
         MyNode root = list.get(0);         // 최댓값(루트)을 임시 저장
-        MyNode last = list.remove(list.size() - 1);
-        // 마지막 노드를 꺼내서
+        MyNode last = list.remove(list.size() - 1); // 마지막 노드를 꺼내서
 
         if (!list.isEmpty()) {
             list.set(0, last);             // 꺼낸 마지막 노드를 루트에 배치
-            heapifyDown(0);                // 아래로 내려서 힙 속성 복원
+            heapifyDown(0);           // 아래로 내려서 힙 속성 복원
         }
         return root;                       // 원래 루트(최댓값)를 반환
     }
@@ -32,8 +30,7 @@ public class MyMaxHeap {
     /** 루트 노드를 삭제 없이 조회만 */
     public MyNode peek() {
         if (list.isEmpty()) {
-            throw new NoSuchElementException("Heap is empty");
-            // 비어있으면 예외 발생
+            throw new NoSuchElementException();
         }
         return list.get(0);                // 맨 위(최댓값) 노드를 반환
     }
@@ -47,7 +44,7 @@ public class MyMaxHeap {
     private void heapifyUp(int idx) {
         MyNode curr = list.get(idx);       // 현재 노드를 가져옴
         while (idx > 0) {
-            int parentIdx = (idx - 1) / 2;  // 부모 인덱스 계산
+            int parentIdx = (idx - 1) / 2; // 부모 인덱스 계산
             MyNode parent = list.get(parentIdx);
 
             if (compare(curr, parent) <= 0) break;
