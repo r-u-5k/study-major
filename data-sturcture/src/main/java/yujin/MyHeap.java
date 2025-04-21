@@ -19,7 +19,7 @@ public class MyHeap {
      */
     public void offer(MyNode node) {
         list.add(node);                   // 배열 끝에 노드 추가
-        heapifyUp(list.size() - 1);      // 삽입된 노드를 위로 올려 힙 속성 유지
+        heapifyUp(list.size() - 1);  // 삽입된 노드를 위로 올려 힙 속성 유지
     }
 
     /**
@@ -63,7 +63,8 @@ public class MyHeap {
         while (idx > 0) {                // 루트가 아닐 동안 반복
             int parentIdx = (idx - 1) / 2; // 부모 노드 인덱스 계산
             MyNode parent = list.get(parentIdx); // 부모 노드 가져오기
-            if (compare(curr, parent) >= 0) break; // 이미 올바른 위치이면 종료
+            if (compare(curr, parent) >= 0)
+                break; // 이미 올바른 위치이면 종료
 
             list.set(idx, parent);       // 부모와 위치 교환
             list.set(parentIdx, curr);   // 현재 노드를 부모 위치로 이동
@@ -75,19 +76,19 @@ public class MyHeap {
      * 루트로 온 노드를 아래로 내려 힙 속성을 유지
      */
     private void heapifyDown(int idx) {
-        int size = list.size();         // 힙 크기 저장
-        MyNode curr = list.get(idx);    // 현재 노드 저장
+        int size = list.size();          // 힙 크기 저장
+        MyNode curr = list.get(idx);     // 현재 노드 저장
 
         while (true) {
-            int leftIdx = 2 * idx + 1;  // 왼쪽 자식 인덱스
+            int leftIdx = 2 * idx + 1;   // 왼쪽 자식 인덱스
             int rightIdx = 2 * idx + 2;  // 오른쪽 자식 인덱스
-            if (leftIdx >= size) break;   // 자식이 없으면 종료
+            if (leftIdx >= size) break;  // 자식이 없으면 종료
 
             int childIdx = leftIdx;      // 기본 선택: 왼쪽 자식
 
             // 오른쪽 자식이 있고, 우선순위가 더 높다면(=작거나/크거나)
             if (rightIdx < size && compare(list.get(rightIdx), list.get(leftIdx)) < 0) {
-                childIdx = rightIdx;      // 오른쪽 자식을 선택
+                childIdx = rightIdx;     // 오른쪽 자식을 선택
             }
 
             if (compare(list.get(childIdx), curr) >= 0) break; // 교환 불필요 시 종료
