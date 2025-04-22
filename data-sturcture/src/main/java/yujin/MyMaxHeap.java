@@ -46,7 +46,7 @@ public class MyMaxHeap {
                 int leftIdx  = 2 * idx + 1;
                 int rightIdx = 2 * idx + 2;
 
-                if (leftIdx >= size) break;     // 자식이 없으면 종료
+                if (leftIdx >= size) break; // 자식이 없으면 종료
 
                 // 둘 중 더 큰(우선순위 높은) 자식 선택
                 int childIdx = leftIdx;
@@ -56,7 +56,7 @@ public class MyMaxHeap {
                 }
 
                 if (compare(list.get(childIdx), list.get(idx)) <= 0) {
-                    break;                       // 현재 >= 자식이면 종료
+                    break; // 현재 >= 자식이면 종료
                 }
 
                 // swap
@@ -64,11 +64,11 @@ public class MyMaxHeap {
                 list.set(idx, list.get(childIdx));
                 list.set(childIdx, tmp);
 
-                idx = childIdx;                 // 검사 위치를 자식으로 이동
+                idx = childIdx; // 검사 위치를 자식으로 이동
             }
         }
 
-        return root;                            // 5) 원래 루트 반환
+        return root; // 5) 원래 루트 반환
     }
 
     /** 힙에 저장된 노드 수 */
