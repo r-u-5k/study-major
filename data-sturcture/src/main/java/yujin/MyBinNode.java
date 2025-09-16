@@ -26,12 +26,16 @@ public class MyBinNode extends MyNode {
 
     public void setLeft(MyBinNode v) {
         left = v;
-        v.setParent(this);
+        if (v != null) {
+            v.setParent(this);
+        }
     }
 
     public void setRight(MyBinNode v) {
         right = v;
-        v.setParent(this);
+        if (v != null) {
+            v.setParent(this);
+        }
     }
 
 }

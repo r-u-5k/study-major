@@ -156,5 +156,48 @@ public class MyBST extends MyBinTree {
         return key;
     }
 
+    public static void main(String[] args) {
+        MyBST bst = new MyBST();
+        bst.insert(new Integer(6));
+        bst.insert(new Integer(2));
+        bst.insert(new Integer(9));
+        bst.insert(new Integer(1));
+        bst.insert(new Integer(4));
+        bst.insert(new Integer(8));
+        bst.insert(new Integer(9));
+        inorderTraverse(bst.root());
+        System.out.println();
+
+        System.out.println("1. find(new Integer(8)) -> " + bst.find(new Integer(8)));
+        System.out.println("2. find(new Integer(3)) -> " + bst.find(new Integer(3)));
+        System.out.println("3. insert(new Integer(3)) -> " + bst.insert(new Integer(3)));
+        System.out.println("4. insert(new Integer(7)) -> " + bst.insert(new Integer(7)));
+        System.out.println("5. insert(new Integer(9)) -> " + bst.insert(new Integer(9)));
+        System.out.println("6. remove(new Integer(1)) -> " + bst.remove(new Integer(1)));
+        System.out.println("7. remove(new Integer(4)) -> " + bst.remove(new Integer(4)));
+        System.out.println("8. remove(new Integer(6)) -> " + bst.remove(new Integer(6)));
+        System.out.println("9. find(new Integer(3)) -> " + bst.find(new Integer(3)));
+        System.out.println("10. find(new Integer(6)) -> " + bst.find(new Integer(6)));
+        System.out.print("11. findAll(new Integer(9)) -> ");
+        ArrayList<Integer> list9 = bst.findAll(new Integer(9));
+        for (Integer x : list9) {
+            System.out.print(x + " ");
+        }
+        System.out.println();
+
+        System.out.print("최종 트리: ");
+        inorderTraverse(bst.root());
+        System.out.println();
+    }
+
+    private static void inorderTraverse(MyBinNode v) {
+        if (v == null) {
+            return;
+        }
+        inorderTraverse(v.left());
+        System.out.print(v.element() + " ");
+        inorderTraverse(v.right());
+    }
+
 
 }
