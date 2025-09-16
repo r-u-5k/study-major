@@ -1,6 +1,6 @@
 package yujin;
 
-public class HW2_BinaryTree {
+public class BinaryTree {
     public static void main(String[] args) {
         MyBinTree bt = new MyBinTree();
         MyBinNode root = bt.addRoot("+");

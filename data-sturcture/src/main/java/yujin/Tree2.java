@@ -2,7 +2,7 @@ package yujin;
 
 import java.util.ArrayList;
 
-public class HW1_Tree2 {
+public class Tree2 {
     public static void main(String[] args) {
         MyTree tree = new MyTree();
         MyNode root = tree.addRoot("Make Money Fast!");

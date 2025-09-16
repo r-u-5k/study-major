@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class HW1_Tree1 {
+public class Tree1 {
     public static void main(String[] args) {
         MyTree tree = new MyTree();
         MyNode root = tree.addRoot("Computers'R Us");
