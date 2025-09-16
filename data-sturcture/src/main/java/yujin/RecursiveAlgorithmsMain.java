@@ -1,6 +1,6 @@
 package yujin;
 
-public class Main {
+public class RecursiveAlgorithmsMain {
     public static void main(String[] args) {
         long base = 5;
         int exponent = 16;
