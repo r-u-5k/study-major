@@ -9,7 +9,6 @@ public class ArrayStack implements Stack {
         top = -1;
     }
 
-    // 생성자 (크기 지정 가능)
     public ArrayStack(int capacity) {
         stack = new char[capacity];
         top = -1;
@@ -28,7 +27,7 @@ public class ArrayStack implements Stack {
     @Override
     public char top() {
         if (isEmpty()) {
-            throw new IllegalStateException("스택이 비어있습니다.");
+            throw new IllegalStateException("스택이 비어 있습니다.");
         }
         return stack[top];
     }
@@ -45,7 +44,7 @@ public class ArrayStack implements Stack {
     @Override
     public char pop() {
         if (isEmpty()) {
-            throw new IllegalStateException("스택이 비어있습니다.");
+            throw new IllegalStateException("스택이 비어 있습니다.");
         }
         return stack[top--];
     }
