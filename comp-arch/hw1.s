@@ -18,11 +18,11 @@ main:
     li t2, 0x2
     li a1, 0x0
 
-drain_loop:
+loop:
     li a0, 0x131
     ecall
-    beq a0, t1, drain_loop
-    beq a0, t2, drain_loop
+    beq a0, t1, loop
+    beq a0, t2, loop
     mv t0, a1
 
     li t3, 'a'
