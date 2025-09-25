@@ -4,11 +4,6 @@ public class ArrayStack implements Stack {
     private char[] stack;
     private int top;
 
-    public ArrayStack() {
-        stack = new char[100];
-        top = -1;
-    }
-
     public ArrayStack(int capacity) {
         stack = new char[capacity];
         top = -1;
