@@ -2,7 +2,7 @@ package yujin;
 
 import java.util.Scanner;
 
-public class InvertExpression {
+public class ArrayStackMain {
     public static String invert(String expr) {
         ArrayStack stack = new ArrayStack(expr.length());
 
