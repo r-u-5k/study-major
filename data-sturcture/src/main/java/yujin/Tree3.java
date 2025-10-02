@@ -41,5 +41,4 @@ public class Tree3 {
         }
         return sumSize;
     }
-
 }

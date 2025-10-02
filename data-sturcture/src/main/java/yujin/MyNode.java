@@ -46,4 +46,5 @@ public class MyNode {
     public void setChildren(ArrayList c) {
         children = c;
     }
+
 }

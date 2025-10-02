@@ -90,5 +90,4 @@ public class MyTree {
         removedChild.setParent(null);
         return removedChild;
     }
-
 }
