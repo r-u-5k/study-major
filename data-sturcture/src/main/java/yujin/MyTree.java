@@ -17,17 +17,20 @@ public class MyTree {
     public int size() {
         if (root == null) return 0;
 
-        class Counter {
-            int count(MyNode node) {
-                int sum = 1;
-                ArrayList<MyNode> children = node.children();
-                for (MyNode child : children) {
-                    sum += count(child);
-                }
-                return sum;
+        int count = 0;
+        ArrayList<MyNode> queue = new ArrayList<>();
+        queue.add(root);
+
+        while (!queue.isEmpty()) {
+            MyNode current = queue.remove(0);
+            count++;
+
+            if (current.children() != null) {
+                queue.addAll(current.children());
             }
         }
-        return new Counter().count(root);
+
+        return count;
     }
 
     public MyNode root() {

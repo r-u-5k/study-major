@@ -4,11 +4,6 @@ public class StackQueue implements Queue {
     ArrayStack inStack;
     ArrayStack outStack;
 
-    public StackQueue() {
-        inStack = new ArrayStack(100);
-        outStack = new ArrayStack(100);
-    }
-
     public StackQueue(int capacity) {
         inStack = new ArrayStack(capacity);
         outStack = new ArrayStack(capacity);

@@ -2,7 +2,7 @@ package yujin;
 
 public class StackQueueMain {
     public static void main(String[] args) {
-        StackQueue queue = new StackQueue();
+        StackQueue queue = new StackQueue(100);
 
         // 1) 'a' ~ 'e'까지 enqueue
         for (char c = 'a'; c <= 'e'; c++) {
