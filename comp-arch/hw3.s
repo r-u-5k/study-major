@@ -1,7 +1,7 @@
 .data
 prompt: .string "Enter N [0, 9]: "
 again: .string "Entered input must be in [0, 9]. Try again.\n"
-title: .string "Fibonacci: "
+result: .string "Fibonacci: "
 space: .byte ' '
 nl: .byte '\n'
 fib: .space 40
@@ -71,7 +71,7 @@ gen_loop:
 
 print_all:
     li a0, 4
-    la a1, title
+    la a1, result
     ecall
 
     li s3, 0
