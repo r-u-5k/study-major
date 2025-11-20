@@ -2,46 +2,54 @@ package yujin;
 
 import java.util.ArrayList;
 
-class MyHashTable2 {
+public class MyHashTable2 {
+
     private ArrayList bucketArray;
     private int bucketCapacity;
-    private int size;
-    private float loadFactorThreshold;
     private float loadFactor;
 
-    public MyHashTable2(int initialCapacity) {
+    MyHashTable2(int initialCapacity) {
         this(initialCapacity, 0.75f);
     }
 
-    public MyHashTable2(int initialCapacity, float loadFactorThreshold) {
+    MyHashTable2(int initialCapacity, float threshold) {
         this.bucketCapacity = initialCapacity;
-        this.loadFactorThreshold = loadFactorThreshold;
-        this.bucketArray = new ArrayList(initialCapacity);
+        this.loadFactor = threshold;
+
+        bucketArray = new ArrayList(initialCapacity);
         for (int i = 0; i < initialCapacity; i++) {
             bucketArray.add(new ArrayList());
         }
-        this.size = 0;
-        this.loadFactor = 0;
+    }
+
+    public int size() {
+        int count = 0;
+        for (Object b : bucketArray) {
+            ArrayList bucket = (ArrayList) b;
+            count += bucket.size();
+        }
+        return count;
     }
 
     private int hashFunc(String k) {
-        int hash = 0;
-        int p = 31;
+        long hash = 0;
+        int p = 33;
         for (char c : k.toCharArray()) {
-            hash = (int) ((hash * (long) p + c) % bucketCapacity);
+            hash = (hash * p + c) % bucketCapacity;
         }
-        return hash;
+        return (int) hash;
     }
 
-    private void rehash(int newCapacity) {
-        ArrayList oldBuckets = this.bucketArray;
-        this.bucketCapacity = newCapacity;
-        this.bucketArray = new ArrayList(newCapacity);
-        for (int i = 0; i < newCapacity; i++) {
+    private void rehash(int capacity) {
+        ArrayList old = bucketArray;
+
+        bucketCapacity = capacity;
+        bucketArray = new ArrayList(capacity);
+        for (int i = 0; i < capacity; i++) {
             bucketArray.add(new ArrayList());
         }
-        this.size = 0;
-        for (Object b : oldBuckets) {
+
+        for (Object b : old) {
             ArrayList bucket = (ArrayList) b;
             for (Object obj : bucket) {
                 StudentInfo s = (StudentInfo) obj;
@@ -51,16 +59,12 @@ class MyHashTable2 {
     }
 
     public float getLoadFactor() {
-        return loadFactor;
-    }
-
-    public int size() {
-        return size;
+        return (float) size() / bucketCapacity;
     }
 
     public String get(String k) {
-        int index = hashFunc(k);
-        ArrayList bucket = (ArrayList) bucketArray.get(index);
+        int idx = hashFunc(k);
+        ArrayList bucket = (ArrayList) bucketArray.get(idx);
         for (Object obj : bucket) {
             StudentInfo s = (StudentInfo) obj;
             if (s.getStudentID().equals(k)) {
@@ -71,8 +75,9 @@ class MyHashTable2 {
     }
 
     public String put(String k, String v) {
-        int index = hashFunc(k);
-        ArrayList bucket = (ArrayList) bucketArray.get(index);
+        int idx = hashFunc(k);
+        ArrayList bucket = (ArrayList) bucketArray.get(idx);
+
         for (Object obj : bucket) {
             StudentInfo s = (StudentInfo) obj;
             if (s.getStudentID().equals(k)) {
@@ -81,28 +86,28 @@ class MyHashTable2 {
                 return old;
             }
         }
-        StudentInfo newInfo = new StudentInfo();
-        newInfo.setStudentID(k);
-        newInfo.setStudentName(v);
-        bucket.add(newInfo);
-        size++;
-        loadFactor = (float) size / bucketCapacity;
-        if (loadFactor >= loadFactorThreshold) {
+
+        StudentInfo info = new StudentInfo();
+        info.setStudentID(k);
+        info.setStudentName(v);
+        bucket.add(info);
+
+        float currentLoadFactor = getLoadFactor();
+        if (currentLoadFactor >= loadFactor) {
             rehash(bucketCapacity * 2);
-            loadFactor = (float) size / bucketCapacity;
         }
+
         return null;
     }
 
     public String remove(String k) {
-        int index = hashFunc(k);
-        ArrayList bucket = (ArrayList) bucketArray.get(index);
+        int idx = hashFunc(k);
+        ArrayList bucket = (ArrayList) bucketArray.get(idx);
+
         for (int i = 0; i < bucket.size(); i++) {
             StudentInfo s = (StudentInfo) bucket.get(i);
             if (s.getStudentID().equals(k)) {
                 bucket.remove(i);
-                size--;
-                loadFactor = (float) size / bucketCapacity;
                 return s.getStudentName();
             }
         }
@@ -110,15 +115,20 @@ class MyHashTable2 {
     }
 
     public static void main(String[] args) {
-        MyHashTable2 ht = new MyHashTable2(13, 0.9f);
+        MyHashTable2 table = new MyHashTable2(13, 0.9f);
+
         for (int i = 1; i <= 15; i++) {
             String id = String.format("CS2025%03d", i);
             String name = "Student" + i;
             System.out.println("Putting " + id + ", " + name);
-            ht.put(id, name);
-            System.out.println("Capacity=" + ht.bucketArray.size() + ", Size=" + ht.size() + ", LoadFactor=" + ht.getLoadFactor());
-            for (int j = 0; j < ht.bucketArray.size(); j++) {
-                ArrayList bucket = (ArrayList) ht.bucketArray.get(j);
+            table.put(id, name);
+
+            System.out.println("Capacity=" + table.bucketArray.size()
+                    + ", Size=" + table.size()
+                    + ", LoadFactor=" + table.getLoadFactor());
+
+            for (int j = 0; j < table.bucketArray.size(); j++) {
+                ArrayList bucket = (ArrayList) table.bucketArray.get(j);
                 System.out.print("Bucket " + j + ": ");
                 for (Object obj : bucket) {
                     StudentInfo s = (StudentInfo) obj;
@@ -129,8 +139,4 @@ class MyHashTable2 {
             System.out.println();
         }
     }
-
 }
-
-
-

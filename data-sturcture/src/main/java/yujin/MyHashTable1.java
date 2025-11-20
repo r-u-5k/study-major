@@ -3,38 +3,45 @@ package yujin;
 import java.util.ArrayList;
 
 
-class MyHashTable1 {
+public class MyHashTable1 {
     private ArrayList bucketArray;
     private int bucketCapacity;
-    private int size;
 
-    public MyHashTable1(int initialCapacity) {
+    MyHashTable1(int initialCapacity) {
         this.bucketCapacity = initialCapacity;
         bucketArray = new ArrayList(initialCapacity);
+
         for (int i = 0; i < initialCapacity; i++) {
             bucketArray.add(new ArrayList());
         }
-        size = 0;
     }
 
-    private int hashFunc(String k) {
-        int hash = 0;
-        int p = 31;
-        for (char c : k.toCharArray()) {
-            hash = (int) ((hash * (long) p + c) % bucketCapacity);
+    private int hashFunc(String key) {
+        int p = 33;
+        long hash = 0;
+
+        for (int i = 0; i < key.length(); i++) {
+            hash = hash * p + key.charAt(i);
         }
-        return hash;
+
+        hash = hash % bucketCapacity;
+        return (int) hash;
     }
 
     public int size() {
-        return size;
+        int count = 0;
+        for (Object b : bucketArray) {
+            ArrayList bucket = (ArrayList) b;
+            count += bucket.size();
+        }
+        return count;
     }
 
     public String get(String k) {
-        int index = hashFunc(k);
-        ArrayList bucket = (ArrayList) bucketArray.get(index);
-        for (int i = 0; i < bucket.size(); i++) {
-            StudentInfo s = (StudentInfo) bucket.get(i);
+        int idx = hashFunc(k);
+        ArrayList bucket = (ArrayList) bucketArray.get(idx);
+        for (Object obj : bucket) {
+            StudentInfo s = (StudentInfo) obj;
             if (s.getStudentID().equals(k)) {
                 return s.getStudentName();
             }
@@ -43,10 +50,11 @@ class MyHashTable1 {
     }
 
     public String put(String k, String v) {
-        int index = hashFunc(k);
-        ArrayList<StudentInfo> bucket = (ArrayList<StudentInfo>) bucketArray.get(index);
+        int idx = hashFunc(k);
+        ArrayList bucket = (ArrayList) bucketArray.get(idx);
 
-        for (StudentInfo s : bucket) {
+        for (Object obj : bucket) {
+            StudentInfo s = (StudentInfo) obj;
             if (s.getStudentID().equals(k)) {
                 String old = s.getStudentName();
                 s.setStudentName(v);
@@ -54,23 +62,22 @@ class MyHashTable1 {
             }
         }
 
-        StudentInfo newInfo = new StudentInfo();
-        newInfo.setStudentID(k);
-        newInfo.setStudentName(v);
-        bucket.add(newInfo);
-        size++;
+        StudentInfo info = new StudentInfo();
+        info.setStudentID(k);
+        info.setStudentName(v);
+        bucket.add(info);
+
         return null;
     }
 
-
     public String remove(String k) {
-        int index = hashFunc(k);
-        ArrayList bucket = (ArrayList) bucketArray.get(index);
+        int idx = hashFunc(k);
+        ArrayList bucket = (ArrayList) bucketArray.get(idx);
+
         for (int i = 0; i < bucket.size(); i++) {
             StudentInfo s = (StudentInfo) bucket.get(i);
             if (s.getStudentID().equals(k)) {
                 bucket.remove(i);
-                size--;
                 return s.getStudentName();
             }
         }
